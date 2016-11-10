@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="input">
+
+<head>
+  <meta charset="utf-8" />
+  <title>AngularJS input</title>
+  <script>
+    document.write('<base href="' + document.location + '" />');
+  </script>
+
+  <script data-require="angular.js@1.5.x" src="https://code.angularjs.org/1.5.8/angular.js" data-semver="1.5.8"></script>
+  <script src="app.js"></script>
+</head>
+
+<body ng-controller="MainCtrl">
+
+  <my-input ng-model="aScopeProperty" placeholder="'Enter text1'" title="'This is my title first'"></my-input>
+  <my-input ng-model="aScopeProperty1" placeholder="'Enter text2'" title="'This is my title 2'"></my-input>
+  <my-input ng-model="aScopeProperty2" placeholder="'Enter text3'" title="'This is my title 3'"></my-input>
+
+</body>
+
+
+    
+
+</html>
