@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-animate-ng-show-production</title>
+
+  <style>
+  .content-area {
+  border: 1px solid black;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.sample-show-hide {
+  transition: all linear 0.5s;
+}
+.sample-show-hide.ng-hide {
+  opacity: 0;
+}
+
+  </style>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+  
+
+  
+</head>
+
+<body ng-app="ngAnimate">
+  <div ng-init="checked = true">
+  <label>
+    <input type="checkbox" ng-model="checked" />
+    Is visible
+  </label>
+  <div class="content-area sample-show-hide" ng-show="checked">
+    am vimal ui developer having experience in angular resposive development aplication. i also worked several number of projects .
+  </div>
+</div>
+</body>
+</html>
+

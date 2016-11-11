@@ -1,0 +1,68 @@
+<html ng-app="customFilter">
+<head>
+<style>
+* { padding: 0px; margin: 0px; font-size: 12px; }
+input { width: 90%; margin: 0 auto; padding: 5px; margin: 5px; }
+.error-msgs li { padding: 5px; color: red;  }
+</style>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.js"></script>
+   
+</head>
+
+<script>
+
+var myAppModule=angular.module('customFilter', ['ngMessages']);
+
+
+myAppModule.controller('controller1', function($scope) {
+   
+   $scope.firstName = "John";
+    $scope.lastName = "Doe";
+    $scope.fullName = function() {
+        return $scope.firstName + " " + $scope.lastName;
+    };
+	
+});
+
+myAppModule.filter('vimal', function() {
+ return function(variable) {
+    return 'Hello, ' + variable + '!';
+  };
+});
+
+
+</script>
+
+
+
+<body>
+<form name="sampleForm" ng-controller="controller1">
+
+
+
+  <div >
+  <div>
+    {{ data | vimal }}
+  </div>
+</div>
+
+
+{{firstName}}<br>
+
+{{fullName}}
+
+    <input name="strongSecret" type="text" ng-model="data"  required placeholder="Please provide stron secret">
+    
+</form>
+
+
+
+</body>
+
+
+</html>
+
+
+
+

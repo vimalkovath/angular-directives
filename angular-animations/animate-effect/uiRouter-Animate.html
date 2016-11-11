@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+
+<head>
+    <title>AngularJS: UI-Router with animation</title>
+    <!-- Bootstrap CSS -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+	
+	<style>
+	/* Have to set height explicity on ui-view 
+to prevent collapsing during animation*/
+.well[ui-view]{
+ height: 65px; 
+}
+
+.ui-view-container {
+  position: relative;
+}
+
+[ui-view].ng-enter, [ui-view].ng-leave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  -webkit-transition:all .5s ease-in-out;
+	-moz-transition:all .5s ease-in-out;
+	-o-transition:all .5s ease-in-out;
+	transition:all .5s ease-in-out;
+}
+
+[ui-view].ng-enter {
+  opacity: 0;
+  -webkit-transform:scale3d(0.5, 0.5, 0.5);
+  -moz-transform:scale3d(0.5, 0.5, 0.5);
+  transform:scale3d(0.5, 0.5, 0.5);
+}
+
+[ui-view].ng-enter-active {
+  opacity: 1;
+  -webkit-transform:scale3d(1, 1, 1);
+  -moz-transform:scale3d(1, 1, 1);
+  transform:scale3d(1, 1, 1);
+}
+
+[ui-view].ng-leave {
+  opacity: 1;
+  /*padding-left: 0px;*/  
+  -webkit-transform:translate3d(0, 0, 0);
+  -moz-transform:translate3d(0, 0, 0);
+  transform:translate3d(0, 0, 0);
+}
+
+[ui-view].ng-leave-active {
+  opacity: 0;
+  /*padding-left: 100px;*/
+  -webkit-transform:translate3d(100px, 0, 0);
+  -moz-transform:translate3d(100px, 0, 0);
+  transform:translate3d(100px, 0, 0);
+}
+	</style>
+	
+	
+</head>
+
+<body class="container">
+  <p><i>Best viewed in pop-out mode to see location changes. Click blue button on the right.</i></p>
+
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#">Quick Start</a>
+      <ul class="nav">
+        <li><a href="#/foo">Route 1</a></li>
+        <li><a href="#/bar">Route 2</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12 ui-view-container">
+      <div class="well" ui-view></div>        
+    </div>
+  </div>         
+  
+  <!-- Angular -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+  <!-- Angular Animate -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.js"></script>
+  <!-- UI-Router -->
+  <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+  
+  <!-- App Script -->
+  <script>
+    var myapp = angular.module('myapp', ["ui.router", "ngAnimate"])
+    myapp.config(function($stateProvider, $urlRouterProvider){    
+      $stateProvider
+          .state("foo", {
+              url: "/foo",
+              template: '<h1>foo</h1>'
+          })
+          .state("bar", {
+              url: "/bar",
+              template: '<h1>bar</h1>'
+          })
+      
+      $urlRouterProvider.otherwise("/foo");
+    })
+  </script>
+
+</body>
+
+</html>

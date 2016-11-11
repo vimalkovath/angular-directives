@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-animate-ng-show-production</title>
+
+  <style>
+  .content-area {
+  border: 1px solid black;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.sample-show-hide {
+  transition: all linear 0.5s;
+}
+.sample-show-hide.ng-hide {
+  opacity: 0;
+}
+
+
+
+*
+  We're using CSS transitions for when
+  the enter and move events are triggered
+  for the element that has the .repeated-item
+  class
+*/
+.repeated-item.ng-enter, .repeated-item.ng-move {
+  transition: all 0.5s linear;
+  opacity: 0;
+}
+
+/*
+ The ng-enter-active and ng-move-active
+ are where the transition destination properties
+ are set so that the animation knows what to
+ animate.
+*/
+.repeated-item.ng-enter.ng-enter-active,
+.repeated-item.ng-move.ng-move-active {
+  opacity: 1;
+}
+
+/*
+  We're using CSS keyframe animations for when
+  the leave event is triggered for the element
+  that has the .repeated-item class
+*/
+.repeated-item.ng-leave {
+  animation: 0.5s my_animation;
+}
+
+@keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+  </style>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+  
+
+  <script>
+  
+  var ngRepeat=angular.module('ngRepeat', ['ngAnimate']);
+  
+  ngRepeat.controller('controller1', function($scope) {
+    $scope.items=["vimal","hello","am done"]; 
+   console.log($scope.items);
+   $scope.firstName = "John";
+    $scope.lastName = "Doe";
+    $scope.fullName = function() {
+        return $scope.firstName + " " + $scope.lastName;
+    };
+	
+});
+
+
+
+ngRepeat.animation('.repeated-item', function() {
+  return {
+    enter : function(element, done) {
+      element.css('opacity',0);
+      jQuery(element).animate({
+        opacity: 1
+      }, done);
+
+      // optional onDone or onCancel callback
+      // function to handle any post-animation
+      // cleanup operations
+      return function(isCancelled) {
+        if(isCancelled) {
+          jQuery(element).stop();
+        }
+      }
+    },
+    leave : function(element, done) {
+      element.css('opacity', 1);
+      jQuery(element).animate({
+        opacity: 0
+      }, done);
+
+      // optional onDone or onCancel callback
+      // function to handle any post-animation
+      // cleanup operations
+      return function(isCancelled) {
+        if(isCancelled) {
+          jQuery(element).stop();
+        }
+      }
+    },
+    move : function(element, done) {
+      element.css('opacity', 0);
+      jQuery(element).animate({
+        opacity: 1
+      }, done);
+
+      // optional onDone or onCancel callback
+      // function to handle any post-animation
+      // cleanup operations
+      return function(isCancelled) {
+        if(isCancelled) {
+          jQuery(element).stop();
+        }
+      }
+    },
+
+    // you can also capture these animation events
+    addClass : function(element, className, done) {},
+    removeClass : function(element, className, done) {}
+  }
+});
+</script>
+  
+</head>
+
+<body ng-app="ngRepeat">
+
+<div ng-controller="controller1">
+  <div ng-init="checked = true">
+  <label>
+    <input type="checkbox" ng-model="checked" />
+    Is visible
+  </label>
+  <div class="content-area sample-show-hide" ng-show="checked">
+    am vimal ui developer having experience in angular resposive development aplication. i also worked several number of projects .
+  </div>
+  
+  
+  
+  
+</div>
+
+
+<div ng-repeat="item in items" class="repeated-item">
+  {{ item }}
+</div>
+</div>
+
+</body>
+</html>
+

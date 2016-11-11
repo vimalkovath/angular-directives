@@ -1,0 +1,21 @@
+
+vimal:{{home.cim}}
+
+
+<br>
+
+run by using any local web server
+
+<br>
+<input ng-model="home.cim" type="text">
+{{home.vars}}
+
+<h2>Welcome to the home page</h1>
+<p>Please click on an element</p>
+<a class="record"
+   ng-href="#/profile/{{ record.id }}"
+   ng-animate-ref="{{ record.id }}"
+   ng-repeat="record in records">
+  {{ record.title }}
+</a>
+
